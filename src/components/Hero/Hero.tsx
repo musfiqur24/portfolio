@@ -40,7 +40,7 @@ export function Hero() {
           <div className="highlights">
             <span>🚀 1+ Years Full-Stack Experience</span>
             <span>💻 ReactJS, TypeScript & Spring Boot</span>
-            <span>💾 MySQL, MongoDB, Oracle</span>
+            <span>💾 MySQL,PostgreSql, Oracle</span>
             <span>📊 Financial & Academic Systems</span>
             <span>⚡ REST APIs & Reporting </span>
           </div>
