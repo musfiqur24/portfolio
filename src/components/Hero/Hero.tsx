@@ -1,39 +1,60 @@
 import { BrowserRouter } from "react-router-dom";
 import { Container } from "./styles";
 import ScrollAnimation from "react-animate-on-scroll";
-import Illustration from "../../assets/illustration.svg";
 import { NavHashLink } from "react-router-hash-link";
 import linkedin from "../../assets/linkedin.svg";
 import githubIcon from "../../assets/github.svg";
 import whatsapp from "../../assets/whatsapp.svg";
 import Hello from "../../assets/Hello.gif";
 import telegram from "../../assets/telegram.svg";
+import illustration from "../../assets/portfolio.jpg";
+
 export function Hero() {
   return (
     <Container id="home">
+      {/* Left Section */}
       <div className="hero-text">
         <ScrollAnimation animateIn="fadeInUp">
           <p>
             Hello <img src={Hello} alt="Hello" width="20px" />, I'm
           </p>
         </ScrollAnimation>
+
         <ScrollAnimation animateIn="fadeInUp" delay={0.2 * 1000}>
           <h1>Musfiqur Rahman</h1>
         </ScrollAnimation>
+
         <ScrollAnimation animateIn="fadeInUp" delay={0.4 * 1000}>
           <h3>Software Engineer</h3>
         </ScrollAnimation>
+
         <ScrollAnimation animateIn="fadeInUp" delay={0.6 * 1000}>
-          <p className="small-resume">1 Year Experience</p>
+          <p className="small-resume">
+            Passionate full-stack developer experienced in <b>ReactJS</b>,{" "}
+            <b>TypeScript</b>, and <b>Java Spring Boot</b>, building scalable
+            web and enterprise solutions.
+          </p>
         </ScrollAnimation>
+
         <ScrollAnimation animateIn="fadeInUp" delay={0.8 * 1000}>
+          <div className="highlights">
+            <span>🚀 1+ Years Full-Stack Experience</span>
+            <span>💻 ReactJS, TypeScript & Spring Boot</span>
+            <span>💾 MySQL, MongoDB, Oracle</span>
+            <span>📊 Financial & Academic Systems</span>
+            <span>⚡ REST APIs & Reporting </span>
+          </div>
+        </ScrollAnimation>
+
+        <ScrollAnimation animateIn="fadeInUp" delay={1 * 1000}>
           <BrowserRouter>
-            <NavHashLink smooth to="#contact" className="button">
-              Contact
+            <NavHashLink smooth to="#contact" className="button primary">
+              Contact Me
             </NavHashLink>
           </BrowserRouter>
         </ScrollAnimation>
-        <ScrollAnimation animateIn="fadeInUp" delay={1 * 1000}>
+
+        <ScrollAnimation animateIn="fadeInUp" delay={1.2 * 1000}>
           <div className="social-media">
             <a
               href="https://www.linkedin.com/in/musfiqur-rahman-957448256/"
@@ -62,7 +83,11 @@ export function Hero() {
           </div>
         </ScrollAnimation>
       </div>
-      <div className="hero-image"></div>
+
+      {/* Right Section */}
+      <div className="hero-image">
+        <img src={illustration} alt="Hero Illustration" />
+      </div>
     </Container>
   );
 }

@@ -4,7 +4,7 @@ import ScrollAnimation from "react-animate-on-scroll";
 
 export default function Experience() {
   return (
-    <Container>
+    <Container id="experience">
       <h2>Experience</h2>
 
       <ScrollAnimation animateIn="fadeInLeft" delay={200}>
@@ -14,9 +14,15 @@ export default function Experience() {
           <p>Apr 2025 – Present</p>
           <p>Dhaka, Bangladesh</p>
           <ul>
-            <li>Developing the Admin – Financial Module (COA, Trial Balance, Income Statement, A/C Head Config).</li>
+            <li>
+              Developing the Admin – Financial Module (COA, Trial Balance,
+              Income Statement, A/C Head Config).
+            </li>
             <li>Building RESTFul APIs using Java Spring Boot.</li>
-            <li>Designing and generating financial reports using JasperSoft Studio.</li>
+            <li>
+              Designing and generating financial reports using JasperSoft
+              Studio.
+            </li>
           </ul>
         </Card>
       </ScrollAnimation>
@@ -28,9 +34,18 @@ export default function Experience() {
           <p>Sep 2024 – Mar 2025</p>
           <p>Dhaka, Bangladesh</p>
           <ul>
-            <li>Developed the Admin Module for the AIMS (User Management, Report Generation) using Agile methodology.</li>
-            <li>Built frontend with ReactJS and TypeScript, managed Backend CRUD with Java Spring Boot.</li>
-            <li>Prepared SRS, SDD, ERD documentation for the MFI Collector app used by several NGOs.</li>
+            <li>
+              Developed the Admin Module for the AIMS (User Management, Report
+              Generation) using Agile methodology.
+            </li>
+            <li>
+              Built frontend with ReactJS and TypeScript, managed Backend CRUD
+              with Java Spring Boot.
+            </li>
+            <li>
+              Prepared SRS, SDD, ERD documentation for the MFI Collector app
+              used by several NGOs.
+            </li>
           </ul>
         </Card>
       </ScrollAnimation>

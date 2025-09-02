@@ -7,6 +7,7 @@ export const Container = styled.section`
   gap: 3rem;
   align-items: center;
 
+  /* Section headings */
   h2 {
     display: inline-block;
     margin-bottom: 2rem;
@@ -24,18 +25,19 @@ export const Container = styled.section`
     font-weight: 600;
   }
 
+  /* Paragraphs */
   p {
-    font-size: 1.6rem;
+    font-size: 1.9rem;
     line-height: 1.8;
     letter-spacing: 0.05rem;
     font-weight: 400;
-    color: #ddd;
+    color: var(--text-secondary); /* theme-aware */
     margin-bottom: 1.2rem;
     transition: transform 0.2s ease, color 0.2s ease;
 
     &:hover {
       transform: translateX(5px);
-      color: #fff;
+      color: var(--text-color); /* highlight on hover */
     }
   }
 
@@ -81,6 +83,7 @@ export const Container = styled.section`
     }
   }
 
+  /* About Image */
   .about-image {
     text-align: center;
 
@@ -98,6 +101,7 @@ export const Container = styled.section`
     }
   }
 
+  /* Responsive adjustments */
   @media (max-width: 960px) {
     display: block;
     text-align: center;
@@ -113,16 +117,16 @@ export const Container = styled.section`
 `;
 
 export const EducationCard = styled.div`
-  background: #2b2b2b;
+  background: var(--card-bg); /* theme-aware background */
   border-radius: 1rem;
   padding: 2rem;
-  color: #f1f1f1;
+  color: var(--text-color);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  display: flex; 
-  flex-direction: column; 
-  justify-content: space-between; /* Add this line to distribute space between items */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   &:hover {
     transform: translateY(-8px) scale(1.02);
@@ -146,20 +150,20 @@ export const EducationCard = styled.div`
   .duration {
     font-size: 1.3rem;
     font-style: italic;
-    color: #aaa;
+    color: var(--text-secondary);
     margin-bottom: 0.3rem;
   }
 
   .location {
     font-size: 1.3rem;
-    color: #bbb;
+    color: var(--text-secondary);
     margin-bottom: 0.5rem;
   }
 
   .details {
     font-size: 1.4rem;
     font-weight: 600;
-    color: #f1f1f1;
+    color: var(--text-color);
     border-left: 3px solid var(--green);
     padding-left: 0.8rem;
   }

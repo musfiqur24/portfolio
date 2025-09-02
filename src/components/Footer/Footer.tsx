@@ -1,17 +1,19 @@
-import { Container } from './styles'
-import reactIcon from '../../assets/react-icon.svg'
-import linkedin from '../../assets/linkedin.svg'
-import githubIcon from '../../assets/github.svg'
-import whatsapp from '../../assets/whatsapp.svg'
-import telegram from '../../assets/telegram.svg'
-import instagramIcon from '../../assets/instagram.svg'
+import { Container } from "./styles";
+import reactIcon from "../../assets/react-icon.svg";
+import linkedin from "../../assets/linkedin.svg";
+import githubIcon from "../../assets/github.svg";
+import whatsapp from "../../assets/whatsapp.svg";
+import telegram from "../../assets/telegram.svg";
+import instagramIcon from "../../assets/instagram.svg";
 
 export function Footer() {
   return (
     <Container className="footer">
-      
       <div>
-         <p>&copy; {new Date().getFullYear()} Musfiqur Rahman. All Rights Reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} Musfiqur Rahman. All Rights
+          Reserved.
+        </p>
       </div>
       <div className="social-media">
         <a
@@ -35,14 +37,10 @@ export function Footer() {
         >
           <img src={whatsapp} alt="Whatsapp" />
         </a>
-        <a
-          href="https://t.me/musfiqur_24"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href="https://t.me/musfiqur_24" target="_blank" rel="noreferrer">
           <img src={telegram} alt="telegram" />
         </a>
       </div>
     </Container>
-  )
+  );
 }

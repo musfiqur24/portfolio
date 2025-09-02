@@ -1,118 +1,127 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
-  :root{
+  :root {
     --pink: #E31F71;
     --black: #212121;
     --green: #23ce6b;
     --blue: #016fb9;
+
+    /* Text and background variables */
+    --text-color: #ffffff;
+    --text-secondary: #cccccc;
+    --background: var(--black);
+    --card-bg: #2b2b2b;
+
     scroll-padding-top: 10rem;
 
-    &.light{
+    &.light {
+      /* Override variables for light mode */
+      --text-color: #212121;
+      --text-secondary: #555555;
+      --background: #FDF5E6; /* Changed to a warmer off-white */
+      --card-bg: #ffffff;
 
-      body{
+      body {
         transition: 0.5s;
-        background-color: #f5f5f5;
-        color: var(--black);
+        background-color: var(--background);
+        color: var(--text-color);
       }
 
-      .logo{
-        color: var(--black);
+      .logo {
+        color: var(--text-color);
       }
 
-      header.header-fixed{
+      header.header-fixed {
         transition: 0.5s;
         background-color: #f5f5f550;
-        a{
+        a {
           transition: 0.5s;
-          color: black;
+          color: var(--text-color);
         }
-        .menu,.menu:before, .menu:after{
-          background-color: var(--black); 
+        .menu, .menu:before, .menu:after {
+          background-color: var(--text-color);
         }
-        .menu.active{
-          background-color: rgba(555,555,555,0);
+        .menu.active {
+          background-color: transparent;
         }
       }
 
-      footer.footer{
+      footer.footer {
         transition: 0.5s;
-        background-color: rgba(0,0,0,0.1);
-        color: var(--black);
+        background-color: rgba(0, 0, 0, 0.1);
+        color: var(--text-color);
       }
 
-      form{
-        input,textarea{
+      form {
+        input, textarea {
           transition: 0.5s;
-          border: solid 1px var(--black);
-          color: var(--black);
-          &::placeholder{
+          border: solid 1px var(--text-color);
+          color: var(--text-color);
+          &::placeholder {
             transition: 0.5s;
-            color: var(--black);
+            color: var(--text-color);
           }
         }
       }
-
     }
   }
 
+  /* Reset & Defaults */
   ul, li {
     text-decoration: none;
     list-style: none;
     margin: 0;
-    padding:0;
+    padding: 0;
   }
 
-  *{
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
-  html{
+  html {
     font-size: 62.5%;
   }
 
-  body{
+  body {
     font-size: 1.6rem;
     -webkit-font-smoothing: antialiased;
-    background-color: var(--black);
-    color: #FFFF;
+    background-color: var(--background);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
   }
 
-  body, input, textarea, button{
+  body, input, textarea, button {
     font-family: 'Red Hat Display', sans-serif;
     font-weight: 400;
   }
 
-  a{
+  a {
     text-decoration: none;
   }
 
-  button, .button{
+  button, .button {
     border: none;
     cursor: pointer;
     background-color: var(--green);
-    color: #FFFF;
+    color: #fff;
     border-radius: 2rem;
     font-weight: 500;
     transition: filter 0.25s;
-    &:hover{
+    &:hover {
       filter: brightness(0.8);
     }
   }
 
-  button:disabled, .button:disabled{
+  button:disabled, .button:disabled {
     filter: brightness(0.8);
     cursor: not-allowed;
   }
 
-
-  .logo{
+  .logo {
     font-size: 3rem;
-    color: #FFFF;
-    // &::first-letter{
-    //   color: var(--green);
-    // }
+    color: var(--text-color);
   }
-`
+`;

@@ -34,7 +34,7 @@ export const Card = styled.div`
   }
 
   h3 {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     color: var(--green);
     margin-bottom: 0.3rem;
   }
@@ -53,7 +53,7 @@ export const Card = styled.div`
   }
 
   ul {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     line-height: 1.6;
     margin-top: 1rem;
     padding-left: 1.5rem;

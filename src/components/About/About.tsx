@@ -6,6 +6,9 @@ import cssIcon from "../../assets/css-icon.svg";
 import jsIcon from "../../assets/js-icon.svg";
 import reactIcon from "../../assets/react-icon.svg";
 import typescriptIcon from "../../assets/typescript-icon.svg";
+import tailwindIcon from "../../assets/tailwind.svg";
+import MySql from "../../assets/1174941.webp";
+import PostgreSql from "../../assets/postgresql.png";
 import ScrollAnimation from "react-animate-on-scroll";
 
 export function About() {
@@ -17,26 +20,28 @@ export function About() {
         </ScrollAnimation>
         <ScrollAnimation animateIn="fadeInLeft" delay={100}>
           <p>
-            Hi there! I'm Musfiqur, a keen & enthusiastic Software Engineer skilled in
-            Full-Stack Web development, contributing in scalable software solutions.
-            Efficient in building generative financial reports and integrating them into
-            web applications.
+            Hi there! I'm Musfiqur, a keen & enthusiastic Software Engineer
+            skilled in Full-Stack Web development, contributing in scalable
+            software solutions. Efficient in building generative financial
+            reports and integrating them into web applications.
           </p>
         </ScrollAnimation>
-        <ScrollAnimation animateIn="fadeInLeft" delay={200} style={{ marginTop: "2rem", marginBottom: "2rem" }}>
+        <ScrollAnimation
+          animateIn="fadeInLeft"
+          delay={200}
+          style={{ marginTop: "2rem", marginBottom: "2rem" }}
+        >
           <p>
-            I build responsive and user-friendly web applications, implement robust
-            backend services and maintain database systems.
+            I build responsive and user-friendly web applications, implement
+            robust backend services and maintain database systems.
           </p>
         </ScrollAnimation>
         <ScrollAnimation animateIn="fadeInLeft" delay={300}>
           <p>
-            I usually follow agile methodology to ensure timely delivery and continuous
-            improvement.
+            I usually follow agile methodology to ensure timely delivery and
+            continuous improvement.
           </p>
         </ScrollAnimation>
-
-
 
         {/* Education Section */}
         <ScrollAnimation animateIn="fadeInLeft" delay={500}>
@@ -62,10 +67,25 @@ export function About() {
             </EducationCard>
           </ScrollAnimation>
         </div>
-                <ScrollAnimation animateIn="fadeInLeft" delay={400}>
+        <ScrollAnimation animateIn="fadeInLeft" delay={400}>
           <h3>Here are my main skills:</h3>
         </ScrollAnimation>
         <div className="hard-skills">
+          <div className="hability">
+            <ScrollAnimation animateIn="fadeInUp" delay={180}>
+              <img src={htmlIcon} alt="Html" />
+            </ScrollAnimation>
+          </div>
+          <div className="hability">
+            <ScrollAnimation animateIn="fadeInUp" delay={190}>
+              <img src={cssIcon} alt="Css" />
+            </ScrollAnimation>
+          </div>
+          <div className="hability">
+            <ScrollAnimation animateIn="fadeInUp" delay={190}>
+              <img src={tailwindIcon} alt="Tailwind" />
+            </ScrollAnimation>
+          </div>
           <div className="hability">
             <ScrollAnimation animateIn="fadeInUp" delay={110}>
               <img src={java} alt="java" />
@@ -87,13 +107,14 @@ export function About() {
             </ScrollAnimation>
           </div>
           <div className="hability">
-            <ScrollAnimation animateIn="fadeInUp" delay={180}>
-              <img src={htmlIcon} alt="Html" />
+            <ScrollAnimation animateIn="fadeInUp" delay={140}>
+              <img src={PostgreSql} alt="PostgreSql" />
             </ScrollAnimation>
           </div>
+
           <div className="hability">
             <ScrollAnimation animateIn="fadeInUp" delay={190}>
-              <img src={cssIcon} alt="Css" />
+              <img src={MySql} alt="MySql" />
             </ScrollAnimation>
           </div>
         </div>
