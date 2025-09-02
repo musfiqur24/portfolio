@@ -4,96 +4,163 @@ export const Container = styled.section`
   margin-top: 12rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: 3rem;
+  align-items: center;
 
-  .hard-skills{
-    margin-top: 1.6rem;
+  h2 {
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.05rem;
+    position: relative;
+  }
+
+  h3 {
+    margin-top: 2.5rem;
+    color: var(--green);
+    font-size: 2.2rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    letter-spacing: 0.05rem;
+    font-weight: 400;
+    color: #ddd;
+    margin-bottom: 1.2rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      transform: translateX(5px);
+      color: #fff;
+    }
+  }
+
+  /* Skills Section */
+  .hard-skills {
+    margin-top: 2rem;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1.8rem;
+    gap: 2rem;
   }
-  .hability{
+
+  .hability {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: transform 0.3s ease;
 
-    img{
-      width: 3.4rem;
+    img {
+      width: 3.6rem;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-6px);
+      img {
+        transform: scale(1.2);
+        filter: drop-shadow(0px 0px 6px var(--green));
+      }
     }
   }
 
-  h2{
-    display: inline-block;
-    margin-bottom: 2rem;
-    // border-bottom: 0.2rem solid var(--blue);
-    font-size :3rem;
-    margin-top: 0rem;
-    color: var(--green);
+  /* Education Grid */
+  .education-grid {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: stretch;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
   }
 
-  h3{
-    margin-top: 2rem;
-    color: var(--green);
-  }
-
-  p{
-    font-size: 1.8rem;
-    letter-spacing: 0.1rem;
-    font-weight: 500;
-  }
-  
-  
-
-  .about-image{
+  .about-image {
     text-align: center;
-   img{
-     margin-top: 2rem;
-     width: 75%;
-     filter: grayscale(0);
-     transition: filter 0.5s;
-     &:hover{
-       filter: grayscale(0);
-     }
-   }
-  }
 
-  @media only screen and (max-width: 480px) {
-    .about-image {
-      max-width: 100%;
-      margin-top: 4rem;
-      img{
-        margin-top: 2rem;
-        width: 100%;
-        filter: grayscale(0);
-        transition: filter 0.5s;
-        &:hover{
-          filter: grayscale(0);
-        }
+    img {
+      margin-top: 2rem;
+      width: 75%;
+      border-radius: 1rem;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+      transition: transform 0.4s ease, filter 0.4s ease;
+
+      &:hover {
+        transform: scale(1.05);
+        filter: brightness(1.1);
+      }
     }
   }
 
-  @media (max-width: 960px){
+  @media (max-width: 960px) {
     display: block;
     text-align: center;
-    
-    .hard-skills{
+
+    .hard-skills {
       justify-content: center;
     }
-    .about-image{
-      display: flex;
-      max-width: 100%;
-      img{
-        margin-top: 2rem;
-        width: 100%;
-        filter: grayscale(0);
-        transition: filter 0.5s;
-        &:hover{
-          filter: grayscale(0);
-        }
+
+    .about-image img {
+      width: 100%;
     }
-    
-    
+  }
+`;
+
+export const EducationCard = styled.div`
+  background: #2b2b2b;
+  border-radius: 1rem;
+  padding: 2rem;
+  color: #f1f1f1;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; /* Add this line to distribute space between items */
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
   }
 
-`
+  h4 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 0.6rem;
+  }
+
+  .institute {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #ffcc00;
+    margin-bottom: 0.4rem;
+  }
+
+  .duration {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #aaa;
+    margin-bottom: 0.3rem;
+  }
+
+  .location {
+    font-size: 1.3rem;
+    color: #bbb;
+    margin-bottom: 0.5rem;
+  }
+
+  .details {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #f1f1f1;
+    border-left: 3px solid var(--green);
+    padding-left: 0.8rem;
+  }
+`;
