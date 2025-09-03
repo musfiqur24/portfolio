@@ -2,6 +2,10 @@ import { Container } from "./styles";
 import githubIcon from "../../assets/github.svg";
 import externalLink from "../../assets/external-link.svg";
 import ScrollAnimation from "react-animate-on-scroll";
+import Deena from "../../assets/Deena.jpg";
+import Tms from "../../assets/Tms.jpg";
+import Dineout from "../../assets/dineout.jpg";
+import Utmgo from "../../assets/Utmgo.jpg";
 
 export function Project() {
   return (
@@ -38,6 +42,9 @@ export function Project() {
             </header>
             <div className="body">
               <h3>Digital Education Enclave For All (DEENA)</h3>
+              <div className="project-image">
+                <img src={Deena} alt="DEENA Project Screenshot" />
+              </div>
               <p>
                 A comprehensive academic information and management system
                 (AIMS) designed to streamline Admission, Registration, Fee
@@ -98,6 +105,9 @@ export function Project() {
             </header>
             <div className="body">
               <h3>Teacher Management System (TMS)</h3>
+              <div className="project-image">
+                <img src={Tms} alt="TMS Project Screenshot" />
+              </div>
               <p>
                 A CRUD-based platform to manage teacher profiles efficiently,
                 with dynamic forms and lists for quick access and updates.
@@ -146,6 +156,9 @@ export function Project() {
             </header>
             <div className="body">
               <h3>UTMGo - A Ride Sharing App</h3>
+              <div className="project-image">
+                <img src={Utmgo} alt="UTMGo Project" />
+              </div>
               <p>
                 A ride-sharing mobile app enabling users to book rides with
                 real-time GPS navigation, ride requests, acceptance/rejection,
@@ -202,6 +215,9 @@ export function Project() {
             </header>
             <div className="body">
               <h3>Food Ordering System</h3>
+              <div className="project-image">
+                <img src={Dineout} alt="Dineout Project" />
+              </div>
               <p>
                 A responsive web-based application allowing users to browse,
                 order, and manage food items online. Focused on providing a

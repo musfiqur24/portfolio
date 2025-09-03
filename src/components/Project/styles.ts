@@ -12,6 +12,22 @@ export const Container = styled.section`
     --text-secondary: #555555; // Slightly lighter text
     --pink: #ff6f61; // A warm pink for hover effect
   }
+  .project-image {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.project-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease-in-out;
+}
+
+.project-image img:hover {
+  transform: scale(1.05);
+}
 
   h2 {
     text-align: center;
@@ -87,6 +103,7 @@ export const Container = styled.section`
           }
         }
       }
+
 
       h3 {
         margin-bottom: 1.5rem;
