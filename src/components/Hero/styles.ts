@@ -89,7 +89,7 @@ export const Container = styled.section`
     padding: 0.9rem 1rem;
     border: 1px solid color-mix(in srgb, var(--green) 24%, var(--border));
     border-radius: 1rem;
-    background: color-mix(in srgb, var(--surface-solid) 72%, transparent);
+    background: var(--card-bg);
     transition: border-color 0.2s ease, background-color 0.2s ease;
 
     @media (hover: hover) and (pointer: fine) {
@@ -177,8 +177,8 @@ export const Container = styled.section`
     border: 1px solid color-mix(in srgb, var(--green) 18%, var(--border));
     border-radius: 3rem;
     background:
-      radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--blue) 11%, transparent), transparent 52%),
-      color-mix(in srgb, var(--surface-solid) 38%, transparent);
+      radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--blue) 18%, transparent), transparent 52%),
+      linear-gradient(145deg, var(--surface-solid), var(--card-bg-hover));
   }
 
   .portrait-frame {
@@ -193,9 +193,9 @@ export const Container = styled.section`
     border: 1px solid var(--border);
     border-radius: 2.4rem;
     background:
-      linear-gradient(155deg, rgba(74, 163, 255, 0.18), transparent 38%),
-      linear-gradient(25deg, rgba(66, 220, 160, 0.2), transparent 48%),
-      var(--surface-solid);
+      linear-gradient(155deg, color-mix(in srgb, var(--blue) 22%, var(--card-bg)), transparent 42%),
+      linear-gradient(25deg, color-mix(in srgb, var(--green) 22%, var(--card-bg-hover)), transparent 52%),
+      var(--card-bg);
     box-shadow: var(--shadow);
 
     &::after {
@@ -450,12 +450,14 @@ export const Container = styled.section`
 
     .availability-note {
       top: 2.5rem;
-      right: -3.8rem;
+      right: 0.3rem;
+      transform-origin: top right;
     }
 
     .stack-note {
       bottom: 0.3rem;
-      left: -4.5rem;
+      left: 0.3rem;
+      transform-origin: bottom left;
     }
 
     .secondary-action {

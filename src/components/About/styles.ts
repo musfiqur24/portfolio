@@ -78,10 +78,10 @@ export const Container = styled.section`
 
     span {
       padding: 0.7rem 1.05rem;
-      border: 1px solid color-mix(in srgb, var(--green) 32%, var(--border));
+      border: 1px solid var(--highlight-start);
       border-radius: 999px;
-      background: color-mix(in srgb, var(--green) 9%, transparent);
-      color: var(--text-color);
+      background: linear-gradient(135deg, var(--highlight-start), var(--highlight-end));
+      color: #ffffff;
       font-size: 1.3rem;
       font-weight: 500;
     }
@@ -96,7 +96,8 @@ export const Container = styled.section`
     padding: clamp(2rem, 3vw, 3.2rem);
     border: 1px solid var(--border);
     border-radius: 2rem;
-    background: var(--card-bg);
+    background: var(--card-surface);
+
   }
 
   .panel-heading {

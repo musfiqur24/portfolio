@@ -23,7 +23,7 @@ export const Container = styled.section`
     h2 {
       max-width: 60rem;
       color: var(--text-color);
-      font-size: clamp(3.3rem, 4vw, 5rem);
+      font-size: clamp(2.8rem, 3.35vw, 4.2rem);
       letter-spacing: -0.05em;
       line-height: 1;
     }
@@ -31,13 +31,15 @@ export const Container = styled.section`
     p {
       max-width: 43rem;
       color: var(--text-secondary);
-      font-size: 1.55rem;
+      font-size: 1.3rem;
       line-height: 1.65;
     }
   }
 
   .project-carousel {
-    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    overflow: visible;
     border: 1px solid color-mix(in srgb, var(--green) 24%, var(--border));
     border-radius: 2.6rem;
     background:
@@ -46,16 +48,94 @@ export const Container = styled.section`
         color-mix(in srgb, var(--pink) 17%, transparent),
         transparent 32rem
       ),
-      var(--card-bg);
-    box-shadow: 0 2.4rem 6rem rgba(0, 0, 0, 0.15);
+      var(--card-surface);
+    outline: 1px solid color-mix(in srgb, var(--green) 34%, var(--border));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--green) 18%, transparent),
+      0 2.4rem 6rem rgba(0, 0, 0, 0.15);
+
+    &::before,
+    &::after {
+      position: absolute;
+      z-index: -1;
+      top: -1.15rem;
+      right: 1.4%;
+      left: 1.4%;
+      height: 1.15rem;
+      border: 0;
+      border-top: 1px solid color-mix(in srgb, var(--green) 24%, var(--border));
+      border-radius: 2.6rem 2.6rem 0 0;
+      background: color-mix(in srgb, var(--card-surface) 92%, var(--surface-solid));
+      content: "";
+    }
+
+    &::after {
+      top: -2.25rem;
+      right: 2.8%;
+      left: 2.8%;
+      opacity: 0.72;
+    }
+  }
+
+  /* Stacked project deck: every shipped build remains visible in one scan. */
+  .project-deck {
+    display: none;
+  }
+
+  .project-deck-card {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 4vw, 5rem);
+    overflow: hidden;
+    padding: clamp(2rem, 4vw, 4rem);
+    border: 1px solid color-mix(in srgb, var(--green) 24%, var(--border));
+    border-radius: 2.2rem;
+    background: var(--card-surface);
+    box-shadow: 0 1.8rem 4rem rgba(0, 0, 0, 0.12);
+
+    &:not(:first-child) {
+      margin-top: -2rem;
+    }
+
+    &:hover,
+    &:focus-within {
+      position: relative;
+      z-index: 2;
+    }
+  }
+
+  .project-deck-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .project-deck-card {
+    .tech-list li,
+    .project-links a {
+      border-color: #8e7dff;
+      background: #7257a8;
+      color: #ffffff;
+    }
+
+    .project-links a:hover {
+      border-color: #a997ff;
+      background: #624693;
+      color: #ffffff;
+    }
+  }
+
+  .project-deck-card .project-preview {
+    min-height: 0;
   }
 
   .project-slide {
     display: grid;
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: clamp(2.7rem, 5vw, 7rem);
-    min-height: 47rem;
-    padding: clamp(2.2rem, 4vw, 4.2rem);
+    gap: clamp(2.2rem, 4vw, 5rem);
+    height: 40rem;
+    min-height: 0;
+    padding: clamp(2rem, 3.2vw, 3.4rem);
     touch-action: pan-y;
 
     &:focus-visible {
@@ -98,7 +178,7 @@ export const Container = styled.section`
     max-width: 50rem;
     margin: 1.3rem 0 1.45rem;
     color: var(--text-color);
-    font-size: clamp(2.65rem, 3.25vw, 4.35rem);
+    font-size: clamp(2.4rem, 2.75vw, 3.5rem);
     letter-spacing: -0.05em;
     line-height: 1.06;
   }
@@ -106,12 +186,12 @@ export const Container = styled.section`
   .project-description {
     max-width: 50rem;
     color: var(--text-secondary);
-    font-size: clamp(1.45rem, 1.6vw, 1.7rem);
+    font-size: clamp(1.2rem, 1.3vw, 1.45rem);
     line-height: 1.7;
   }
 
   .project-stack {
-    margin-top: 2.4rem;
+    margin-top: 1.8rem;
   }
 
   .stack-label {
@@ -139,7 +219,7 @@ export const Container = styled.section`
     display: flex;
     flex-wrap: wrap;
     gap: 0.85rem;
-    margin-top: 2.6rem;
+    margin-top: 2rem;
 
     a {
       display: inline-flex;
@@ -167,8 +247,11 @@ export const Container = styled.section`
   .project-preview {
     display: flex;
     min-width: 0;
-    min-height: 36rem;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    min-height: 0;
     flex-direction: column;
+    align-self: center;
     padding: 1rem;
     border: 1px solid color-mix(in srgb, var(--pink) 42%, var(--border));
     border-radius: 2rem;
@@ -225,15 +308,20 @@ export const Container = styled.section`
       display: block;
       width: 100%;
       height: 100%;
+      /* Fill the normalized browser viewport edge-to-edge. */
       object-fit: cover;
-      object-position: top center;
+      object-position: center;
+      background: var(--surface-solid);
     }
   }
 
   .carousel-footer {
+    position: relative;
+    z-index: 3;
     display: flex;
     align-items: center;
     gap: 2.4rem;
+    margin-top: 1.2rem;
     padding: 0 0 2.2rem clamp(2.2rem, 4vw, 4.2rem);
   }
 
@@ -329,7 +417,13 @@ export const Container = styled.section`
     .project-slide {
       grid-template-columns: 1fr;
       gap: 2.5rem;
+      height: auto;
       min-height: 0;
+    }
+
+    .project-deck-card {
+      grid-template-columns: 1fr;
+      gap: 2rem;
     }
 
     .project-copy {
@@ -338,8 +432,10 @@ export const Container = styled.section`
     }
 
     .project-preview {
+      height: auto;
+      aspect-ratio: 16 / 9;
       order: 1;
-      min-height: clamp(25rem, 58vw, 39rem);
+      min-height: 0;
     }
   }
 
@@ -358,7 +454,9 @@ export const Container = styled.section`
     }
 
     .project-preview {
-      min-height: 23rem;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      min-height: 0;
       padding: 0.75rem;
       border-radius: 1.45rem;
     }

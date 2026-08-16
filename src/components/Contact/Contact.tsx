@@ -29,7 +29,7 @@ export function Contact() {
     <Container id="contact" aria-labelledby="contact-heading">
       <Reveal>
         <header className="contact-heading">
-          <span className="eyebrow">05 / Open a channel</span>
+          <span className="eyebrow">06 / Open a channel</span>
           <h2 id="contact-heading">Let&apos;s ship the next idea.</h2>
           <p>
             Have a project, role, or idea in mind? Send a brief message and

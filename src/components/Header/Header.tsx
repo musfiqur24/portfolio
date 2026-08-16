@@ -6,6 +6,7 @@ import Resume from "../../assets/Musfiqur-Rahman.pdf";
 const navigationItems = [
   { href: "#project", label: "Work" },
   { href: "#about", label: "About" },
+  { href: "#research", label: "Research" },
   { href: "#contact", label: "Contact" },
 ];
 

@@ -59,7 +59,7 @@ export const Container = styled.section`
         color-mix(in srgb, var(--pink) 12%, transparent),
         transparent 17rem
       ),
-      var(--card-bg);
+      var(--card-surface);
     box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.1);
     transition:
       border-color 0.22s ease,
@@ -124,7 +124,7 @@ export const Container = styled.section`
     padding: 0.7rem 0.8rem;
     border: 1px solid var(--border);
     border-radius: 0.95rem;
-    background: color-mix(in srgb, var(--text-color) 3%, transparent);
+    background: var(--card-bg-hover);
     transition:
       border-color 0.2s ease,
       background-color 0.2s ease;

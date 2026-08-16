@@ -59,7 +59,7 @@ export const Card = styled.article`
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 1.9rem;
-  background: var(--card-bg);
+  background: var(--card-surface);
   box-shadow: 0 1.8rem 4.5rem rgba(0, 0, 0, 0.13);
   transition:
     border-color 0.24s ease,
@@ -77,13 +77,9 @@ export const Card = styled.article`
     place-items: center;
     align-content: start;
     padding-top: 3.3rem;
-    border-right: 1px solid color-mix(in srgb, var(--green) 28%, var(--border));
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--green) 14%, transparent),
-      transparent 80%
-    );
-    color: var(--green);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(180deg, var(--section-accent-start), var(--section-accent-end));
+    color: #ffffff;
     font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -181,10 +177,10 @@ export const Card = styled.article`
     min-width: 4rem;
     gap: 0.75rem;
     padding: 1rem 1.15rem;
-    border: 1px solid color-mix(in srgb, var(--green) 32%, var(--border));
+    border: 1px solid var(--highlight-start);
     border-radius: 999px;
-    background: color-mix(in srgb, var(--green) 10%, transparent);
-    color: var(--green);
+    background: linear-gradient(135deg, var(--section-accent-start), var(--section-accent-end));
+    color: #ffffff;
     font-size: 1.08rem;
     font-weight: 700;
     letter-spacing: 0.04em;

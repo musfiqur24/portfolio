@@ -4,8 +4,8 @@ import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { Container } from "./styles";
 import { Reveal } from "../motion/Reveal";
 import Deena from "../../assets/Deena.jpg";
-import Tms from "../../assets/Tms.jpg";
-import Dineout from "../../assets/dineout.jpg";
+import MicrofinanceMonitor from "../../assets/MicrofinanceMonitor.jpg";
+import BudgetBuddy from "../../assets/budgetbuddy.jpg";
 import Utmgo from "../../assets/Utmgo.jpg";
 
 type ProjectLink = {
@@ -32,23 +32,46 @@ const projects: ProjectDetails[] = [
       "A comprehensive academic information and management system that streamlines admission, registration, fee collection, financial services, and reporting in one secure platform.",
     technologies: ["ReactJS", "TypeScript", "Java Spring Boot", "Oracle", "Jaspersoft Studio"],
     links: [
-      { href: "https://api.be.com.bd/deena/", label: "View DEENA", type: "preview" },
+      { href: "https://api.benchmarksoftwarebd.com:9443/deena/user/login", label: "View DEENA", type: "preview" },
     ],
   },
   {
-    title: "Teacher Management System (TMS)",
-    image: Tms,
-    imageAlt: "Teacher Management System screenshot",
+    title: "Microfinance Monitor",
+    image: MicrofinanceMonitor,
+    imageAlt: "Microfinance Monitor lending and collections dashboard",
     description:
-      "A CRUD-based platform for managing teacher profiles through dynamic forms and searchable lists, paired with reliable and scalable backend services.",
-    technologies: ["ReactJS", "Tailwind CSS", "Java Spring Boot"],
+      "Microfinance Monitor helps NGOs manage complete lending and collection operations—from member registration and loan proposals to loan creation, regular and irregular collections, and repayment tracking. Built for field teams and Credit Officers, it shows who to collect from, when to collect, how much is due, and the progress of every loan across communities throughout Bangladesh.",
+    technologies: ["React", "Spring Boot", "Oracle Database"],
     links: [
       {
-        href: "https://github.com/musfiqur24",
-        label: "View TMS source on GitHub",
-        type: "source",
+        href: "https://jdev-test.benchmarksoftwarebd.com/",
+        label: "View Microfinance Monitor",
+        type: "preview",
       },
-      { href: "https://tms-ui-blush.vercel.app/", label: "View TMS", type: "preview" },
+    ],
+  },
+  {
+    title: "Budget Buddy",
+    image: BudgetBuddy,
+    imageAlt: "Budget Buddy personal finance dashboard",
+    description:
+      "A personal finance platform for tracking daily income and expenses, setting category-level budgets, and receiving alerts when spending crosses a limit. Budget Buddy also manages lending and borrowing records so users can keep a clear view of money moving between people.",
+    technologies: [
+      "React",
+      "Express.js",
+      "MongoDB",
+      "AWS",
+      "Nginx",
+      "Docker",
+      "GitHub Actions CI/CD",
+      "Passport.js OAuth",
+    ],
+    links: [
+      {
+        href: "https://budget-buddy.mywire.org/",
+        label: "View Budget Buddy",
+        type: "preview",
+      },
     ],
   },
   {
@@ -63,26 +86,6 @@ const projects: ProjectDetails[] = [
         href: "https://github.com/musfiqur24/UTM_Go_backbenchers-",
         label: "View UTMGo source on GitHub",
         type: "source",
-      },
-    ],
-  },
-  {
-    title: "Food Ordering System",
-    image: Dineout,
-    imageAlt: "Food ordering system screenshot",
-    description:
-      "A responsive food-ordering experience that lets customers browse and manage orders online while simplifying day-to-day restaurant operations.",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    links: [
-      {
-        href: "https://github.com/musfiqur24/dine_out",
-        label: "View food ordering source on GitHub",
-        type: "source",
-      },
-      {
-        href: "https://dine-out-pi-bay.vercel.app/",
-        label: "View food ordering system",
-        type: "preview",
       },
     ],
   },
@@ -124,6 +127,46 @@ export function Project() {
             and interfaces people can use without a manual.
           </p>
         </div>
+      </Reveal>
+
+      <Reveal delay={0.1}>
+        <section className="project-deck" aria-label="All projects">
+          {projects.map((project, index) => (
+            <m.article
+              className="project-deck-card"
+              key={project.title}
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: prefersReducedMotion ? 0.01 : 0.42, delay: index * 0.06 }}
+            >
+              <div className="project-deck-copy">
+                <div className="project-topline">
+                  <span className="project-label">{String(index + 1).padStart(2, "0")} / Build</span>
+                  <span className="project-count">{project.technologies.length} technologies</span>
+                </div>
+                <h3>{project.title}</h3>
+                <p className="project-description">{project.description}</p>
+                <div className="project-stack">
+                  <span className="stack-label">Built with</span>
+                  <ul className="tech-list">
+                    {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
+                  </ul>
+                </div>
+                <div className="project-links">
+                  {project.links.map((link) => {
+                    const LinkIcon = link.type === "source" ? Code2 : ExternalLink;
+                    return <m.a href={link.href} key={link.href} target="_blank" rel="noreferrer" aria-label={link.label} whileHover={prefersReducedMotion ? undefined : { y: -2 }}><LinkIcon size={17} aria-hidden="true" />{link.type === "source" ? "View source" : "View project"}</m.a>;
+                  })}
+                </div>
+              </div>
+              <div className="project-preview">
+                <div className="browser-bar" aria-hidden="true"><span /><span /><span /></div>
+                <div className="project-image"><img src={project.image} alt={project.imageAlt} loading={index === 0 ? "eager" : "lazy"} /></div>
+              </div>
+            </m.article>
+          ))}
+        </section>
       </Reveal>
 
       <Reveal delay={0.1}>

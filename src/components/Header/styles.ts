@@ -134,6 +134,7 @@ export const Container = styled.header`
   }
 
   .menu {
+    position: relative;
     display: none;
     width: 3.8rem;
     height: 3.8rem;

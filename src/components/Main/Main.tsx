@@ -6,6 +6,7 @@ import { About } from "../About/About";
 import { Contact } from "../Contact/Contact";
 import { Project } from "../Project/Project";
 import { TechStack } from "../TechStack/TechStack";
+import { Research } from "../Research/Research";
 import java from "../../assets/java.svg";
 import Experience from "../Experience/Experience";
 import {
@@ -150,6 +151,7 @@ export function Main() {
       <Project />
       <Experience />
       <TechStack />
+      <Research />
       <About />
       <Contact />
     </Container>
