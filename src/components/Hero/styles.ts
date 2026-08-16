@@ -12,27 +12,53 @@ export const Container = styled.section`
     max-width: 69rem;
   }
 
+  .engineer-signature {
+    width: min(100%, 56rem);
+}
+
+  .signature-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.55rem;
+    color: var(--text-secondary);
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.85rem;
+
+    i {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: #ff796d;
+
+      &:nth-child(2) { background: #f4c95d; }
+      &:nth-child(3) { background: #5fe0a7; }
+    }
+
+    span { margin-left: 0.35rem; opacity: 0.75; }
+  }
+
   .hero-kicker {
     display: inline-flex;
     align-items: center;
-    color: var(--green);
+    margin: 0;
+    color: var(--text-color);
     font-size: 1.2rem;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+
   }
 
   .code-twist {
     display: block;
     width: fit-content;
-    margin-top: 0.9rem;
-    padding: 0.45rem 0.8rem;
-    border-left: 2px solid var(--green);
-    border-radius: 0 0.5rem 0.5rem 0;
-    background: color-mix(in srgb, var(--surface-solid) 58%, transparent);
+    margin-top: 0.45rem;
+    padding: 0.35rem 0 0.45rem;
+    border-top: 1px solid color-mix(in srgb, var(--green) 25%, var(--border));
     color: var(--text-secondary);
     font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-    font-size: 1.05rem;
+    font-size: 1.08rem;
     line-height: 1.6;
     letter-spacing: 0.01em;
     max-width: 100%;
@@ -47,7 +73,7 @@ export const Container = styled.section`
     }
 
     strong {
-      color: var(--green);
+      color: var(--text-color);
       font-weight: 700;
     }
   }
@@ -132,6 +158,8 @@ export const Container = styled.section`
     min-height: 5.2rem;
     padding: 0 2.1rem;
     border-radius: 1rem;
+    background: #7257a8;
+    color: #ffffff;
     box-shadow: 0 1.4rem 3rem rgba(66, 220, 160, 0.17);
     font-size: 1.45rem;
   }

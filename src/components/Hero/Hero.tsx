@@ -103,11 +103,14 @@ export function Hero() {
     <Container id="home" ref={heroRef}>
       <div className="hero-copy">
         <Reveal delay={0.04}>
-          <p className="hero-kicker">Software Engineer </p>
-          <p className="code-twist" aria-label="Engineering focus">
-            <span>const</span> engineer = &#123; stack: [
-            <strong>&quot;Java&quot;, &quot;Node.js&quot;, &quot;React&quot;</strong>], ships: <strong>&quot;reliable systems&quot;</strong> &#125;;
-          </p>
+          <div className="engineer-signature" aria-label="Engineering focus">
+            <div className="signature-bar" aria-hidden="true"><i /><i /><i /><span>engineer.ts</span></div>
+            <p className="hero-kicker">Software Engineer</p>
+            <p className="code-twist">
+              <span>const</span> engineer = &#123; stack: [
+              <strong>&quot;Java&quot;, &quot;Node.js&quot;, &quot;React&quot;</strong>], ships: <strong>&quot;reliable systems&quot;</strong> &#125;;
+            </p>
+          </div>
         </Reveal>
 
         <Reveal delay={0.12}>
