@@ -1,92 +1,212 @@
-import { BrowserRouter } from "react-router-dom";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { m, useReducedMotion } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowUpRight, Code2 } from "lucide-react";
 import { Container } from "./styles";
-import ScrollAnimation from "react-animate-on-scroll";
-import { NavHashLink } from "react-router-hash-link";
-import linkedin from "../../assets/linkedin.svg";
-import githubIcon from "../../assets/github.svg";
-import whatsapp from "../../assets/whatsapp.svg";
-import Hello from "../../assets/Hello.gif";
-import telegram from "../../assets/telegram.svg";
-import illustration from "../../assets/portfolio.jpg";
+import { Reveal } from "../motion/Reveal";
+import Musfiqur from "../../assets/Musfiqur.png";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const careerStart = new Date(2024, 6, 1);
+
+function getExperienceDuration(now: Date) {
+  let years = now.getFullYear() - careerStart.getFullYear();
+  let months = now.getMonth() - careerStart.getMonth();
+
+  if (months < 0) {
+    years -= 1;
+    months += 12;
+  }
+
+  return { years, months };
+}
 
 export function Hero() {
+  const prefersReducedMotion = useReducedMotion() ?? false;
+  const heroRef = useRef<HTMLElement | null>(null);
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(new Date()), 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const experience = getExperienceDuration(now);
+  const experienceLabel = [
+    `${experience.years} yr${experience.years === 1 ? "" : "s"}`,
+    experience.months ? `${experience.months} mo` : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  useLayoutEffect(() => {
+    const scope = heroRef.current;
+
+    if (!scope || prefersReducedMotion) {
+      return;
+    }
+
+    const context = gsap.context(() => {
+      const entrance = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      entrance
+        .from(".visual-parallax", {
+          autoAlpha: 0,
+          y: 34,
+          scale: 0.96,
+          duration: 0.82,
+        })
+        .from(
+          ".visual-note",
+          {
+            autoAlpha: 0,
+            y: 18,
+            scale: 0.92,
+            duration: 0.46,
+            stagger: 0.12,
+          },
+          "-=0.36"
+        );
+
+      gsap.to(".orbit-one", {
+        rotation: 360,
+        duration: 28,
+        ease: "none",
+        repeat: -1,
+      });
+
+      gsap.to(".orbit-two", {
+        rotation: -360,
+        duration: 38,
+        ease: "none",
+        repeat: -1,
+      });
+
+      gsap.to(".portrait-frame", {
+        y: -18,
+        ease: "none",
+        scrollTrigger: {
+          trigger: scope,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.7,
+        },
+      });
+    }, scope);
+
+    return () => context.revert();
+  }, [prefersReducedMotion]);
+
   return (
-    <Container id="home">
-      {/* Left Section */}
-      <div className="hero-text">
-        <ScrollAnimation animateIn="fadeInUp">
-          <p>
-            Hello <img src={Hello} alt="Hello" width="20px" />, I'm
+    <Container id="home" ref={heroRef}>
+      <div className="hero-copy">
+        <Reveal delay={0.04}>
+          <p className="hero-kicker">Software Engineer </p>
+          <p className="code-twist" aria-label="Engineering focus">
+            <span>const</span> engineer = &#123; stack: [
+            <strong>&quot;Java&quot;, &quot;Node.js&quot;, &quot;React&quot;</strong>], ships: <strong>&quot;reliable systems&quot;</strong> &#125;;
           </p>
-        </ScrollAnimation>
+        </Reveal>
 
-        <ScrollAnimation animateIn="fadeInUp" delay={0.2 * 1000}>
-          <h1>Musfiqur Rahman</h1>
-        </ScrollAnimation>
+        <Reveal delay={0.12}>
+          <h1>
+            I build scalable web applications <span>and digital experiences.</span>
+          </h1>
+        </Reveal>
 
-        <ScrollAnimation animateIn="fadeInUp" delay={0.4 * 1000}>
-          <h3>Software Engineer</h3>
-        </ScrollAnimation>
-
-        <ScrollAnimation animateIn="fadeInUp" delay={0.6 * 1000}>
-          <p className="small-resume">
-            Passionate full-stack developer experienced in <b>ReactJS</b>,{" "}
-            <b>TypeScript</b>, and <b>Java Spring Boot</b>, building scalable
-            web and enterprise solutions.
+        <Reveal delay={0.2}>
+          <p className="hero-description">
+            I&apos;m Musfiqur Rahman, a software engineer focused on reliable
+            backend systems, clean APIs, and thoughtful product experiences.
           </p>
-        </ScrollAnimation>
+        </Reveal>
 
-        <ScrollAnimation animateIn="fadeInUp" delay={0.8 * 1000}>
-          <div className="highlights">
-            <span>🚀 1+ Years Full-Stack Experience</span>
-            <span>💻 ReactJS, TypeScript & Spring Boot</span>
-            <span>💾 MySQL,PostgreSql, Oracle</span>
-            <span>📊 Financial & Academic Systems</span>
-            <span>⚡ REST APIs & Reporting </span>
+        <Reveal delay={0.25}>
+          <div className="hero-usp" aria-label="Profile highlights">
+            <m.div className="usp-card" whileHover={prefersReducedMotion ? undefined : { y: -3 }}>
+              <m.strong
+                key={experienceLabel}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: prefersReducedMotion ? 0 : 0.24 }}
+              >
+                {experienceLabel}
+              </m.strong>
+              <span>Engineering experience</span>
+            </m.div>
+            <m.div className="usp-card" whileHover={prefersReducedMotion ? undefined : { y: -3 }}>
+              <strong>CRM integration</strong>
+              <span>Connected business workflows</span>
+            </m.div>
+            <m.div className="usp-card" whileHover={prefersReducedMotion ? undefined : { y: -3 }}>
+              <strong>Full-stack</strong>
+              <span>Product delivery</span>
+            </m.div>
+            <m.div className="usp-card" whileHover={prefersReducedMotion ? undefined : { y: -3 }}>
+              <strong>Fintech systems</strong>
+              <span>Financial workflows &amp; APIs</span>
+            </m.div>
           </div>
-        </ScrollAnimation>
+        </Reveal>
 
-        <ScrollAnimation animateIn="fadeInUp" delay={1 * 1000}>
-          <BrowserRouter>
-            <NavHashLink smooth to="#contact" className="button primary">
-              Contact Me
-            </NavHashLink>
-          </BrowserRouter>
-        </ScrollAnimation>
-
-        <ScrollAnimation animateIn="fadeInUp" delay={1.2 * 1000}>
-          <div className="social-media">
-            <a
-              href="https://www.linkedin.com/in/musfiqur-rahman-957448256/"
-              target="_blank"
-              rel="noreferrer"
+        <Reveal delay={0.28}>
+          <div className="hero-actions">
+            <m.a
+              href="#project"
+              className="button primary-action"
+              whileHover={prefersReducedMotion ? undefined : { y: -3 }}
+              whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
             >
-              <img src={linkedin} alt="Linkedin" />
-            </a>
-            <a
+              View my work
+            </m.a>
+            <m.a
               href="https://github.com/musfiqur24"
+              className="secondary-action"
               target="_blank"
               rel="noreferrer"
+              aria-label="GitHub (opens in a new tab)"
+              whileHover={prefersReducedMotion ? undefined : { x: 4 }}
+              whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
             >
-              <img src={githubIcon} alt="GitHub" />
-            </a>
-            <a
-              href="https://api.whatsapp.com/send/?phone=+8801752475486&text=Hello%20Musfiq%2C%20I%20found%20your%20contact%20through%20your%20portfolio%20site."
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img src={whatsapp} alt="Whatsapp" />
-            </a>
-            <a href="https://t.me/musfiqur_24" target="_blank" rel="noreferrer">
-              <img src={telegram} alt="telegram" />
-            </a>
+              <Code2 size={18} strokeWidth={2.1} aria-hidden="true" />
+              GitHub <ArrowUpRight size={17} strokeWidth={2.1} aria-hidden="true" />
+            </m.a>
           </div>
-        </ScrollAnimation>
+        </Reveal>
       </div>
 
-      {/* Right Section */}
-      <div className="hero-image">
-        <img src={illustration} alt="Hero Illustration" />
+      <div className="hero-visual">
+        <div className="visual-parallax">
+          <div className="visual-orbit orbit-one" aria-hidden="true" />
+          <div className="visual-orbit orbit-two" aria-hidden="true" />
+          <div className="portrait-frame">
+            <div className="portrait-topbar" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+            <m.img
+              src={Musfiqur}
+              alt="Musfiqur Rahman"
+              whileHover={prefersReducedMotion ? undefined : { scale: 1.02, y: -4 }}
+              transition={{ duration: 0.28, ease: "easeOut" }}
+            />
+          </div>
+          <div className="visual-note availability-note">
+            <span className="note-dot" aria-hidden="true" />
+            <div>
+              <strong>Open to collaborate</strong>
+              <small>Web & enterprise systems</small>
+            </div>
+          </div>
+          <div className="visual-note stack-note">
+            <small>Core stack</small>
+            <strong>Java Full Stack &middot; MERN</strong>
+            <span>Java / React / SQL</span>
+          </div>
+        </div>
       </div>
     </Container>
   );

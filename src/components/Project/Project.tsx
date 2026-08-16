@@ -1,240 +1,282 @@
+import { useState } from "react";
+import { ArrowLeft, ArrowRight, Code2, ExternalLink } from "lucide-react";
+import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { Container } from "./styles";
-import githubIcon from "../../assets/github.svg";
-import externalLink from "../../assets/external-link.svg";
-import ScrollAnimation from "react-animate-on-scroll";
+import { Reveal } from "../motion/Reveal";
 import Deena from "../../assets/Deena.jpg";
 import Tms from "../../assets/Tms.jpg";
 import Dineout from "../../assets/dineout.jpg";
 import Utmgo from "../../assets/Utmgo.jpg";
 
+type ProjectLink = {
+  href: string;
+  label: string;
+  type: "source" | "preview";
+};
+
+type ProjectDetails = {
+  title: string;
+  image: string;
+  imageAlt: string;
+  description: string;
+  technologies: string[];
+  links: ProjectLink[];
+};
+
+const projects: ProjectDetails[] = [
+  {
+    title: "Digital Education Enclave For All (DEENA)",
+    image: Deena,
+    imageAlt: "DEENA project screenshot",
+    description:
+      "A comprehensive academic information and management system that streamlines admission, registration, fee collection, financial services, and reporting in one secure platform.",
+    technologies: ["ReactJS", "TypeScript", "Java Spring Boot", "Oracle", "Jaspersoft Studio"],
+    links: [
+      { href: "https://api.be.com.bd/deena/", label: "View DEENA", type: "preview" },
+    ],
+  },
+  {
+    title: "Teacher Management System (TMS)",
+    image: Tms,
+    imageAlt: "Teacher Management System screenshot",
+    description:
+      "A CRUD-based platform for managing teacher profiles through dynamic forms and searchable lists, paired with reliable and scalable backend services.",
+    technologies: ["ReactJS", "Tailwind CSS", "Java Spring Boot"],
+    links: [
+      {
+        href: "https://github.com/musfiqur24",
+        label: "View TMS source on GitHub",
+        type: "source",
+      },
+      { href: "https://tms-ui-blush.vercel.app/", label: "View TMS", type: "preview" },
+    ],
+  },
+  {
+    title: "UTMGo - A Ride Sharing App",
+    image: Utmgo,
+    imageAlt: "UTMGo ride sharing app screenshot",
+    description:
+      "A ride-sharing mobile app for booking rides with GPS navigation, ride requests, accept-or-reject flows, and efficient queue management for daily commuters.",
+    technologies: ["Flutter", "Firebase"],
+    links: [
+      {
+        href: "https://github.com/musfiqur24/UTM_Go_backbenchers-",
+        label: "View UTMGo source on GitHub",
+        type: "source",
+      },
+    ],
+  },
+  {
+    title: "Food Ordering System",
+    image: Dineout,
+    imageAlt: "Food ordering system screenshot",
+    description:
+      "A responsive food-ordering experience that lets customers browse and manage orders online while simplifying day-to-day restaurant operations.",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    links: [
+      {
+        href: "https://github.com/musfiqur24/dine_out",
+        label: "View food ordering source on GitHub",
+        type: "source",
+      },
+      {
+        href: "https://dine-out-pi-bay.vercel.app/",
+        label: "View food ordering system",
+        type: "preview",
+      },
+    ],
+  },
+];
+
 export function Project() {
+  const prefersReducedMotion = useReducedMotion() ?? false;
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const activeProject = projects[activeIndex];
+
+  const showPrevious = () => {
+    setDirection(-1);
+    setActiveIndex((index) => (index - 1 + projects.length) % projects.length);
+  };
+
+  const showNext = () => {
+    setDirection(1);
+    setActiveIndex((index) => (index + 1) % projects.length);
+  };
+
+  const selectProject = (index: number) => {
+    if (index === activeIndex) return;
+
+    setDirection(index > activeIndex ? 1 : -1);
+    setActiveIndex(index);
+  };
+
   return (
     <Container id="project">
-      <h2>My Projects</h2>
-      <div className="projects">
-        {/* DEENA Project */}
-        <ScrollAnimation animateIn="flipInX">
-          <div className="project">
-            <header>
-              <svg
-                width="50"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#23ce6b"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <title>Folder</title>
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-              </svg>
-              <div className="project-links">
-                <a
-                  href="https://api.be.com.bd/deena/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src={externalLink} alt="Visit site" />
-                </a>
-              </div>
-            </header>
-            <div className="body">
-              <h3>Digital Education Enclave For All (DEENA)</h3>
-              <div className="project-image">
-                <img src={Deena} alt="DEENA Project Screenshot" />
-              </div>
-              <p>
-                A comprehensive academic information and management system
-                (AIMS) designed to streamline Admission, Registration, Fee
-                Collection, Financial Services, and Reporting. Integrated
-                financial reporting tools like COA, Income Statement, and Trial
-                Balance with secure backend services, providing institutions
-                with an all-in-one digital education platform.
-              </p>
-            </div>
-            <footer>
-              <ul className="tech-list">
-                <li>ReactJS</li>
-                <li>TypeScript</li>
-                <li>Java Spring Boot</li>
-                <li>Oracle </li>
-                <li>JasperSoft Studio</li>
-              </ul>
-            </footer>
+      <Reveal>
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">01 / Build log</span>
+            <h2>Projects shipped with purpose</h2>
           </div>
-        </ScrollAnimation>
+          <p>
+            Production-minded builds shaped around clear workflows, reliable data,
+            and interfaces people can use without a manual.
+          </p>
+        </div>
+      </Reveal>
 
-        {/* Teacher Management System */}
-        <ScrollAnimation animateIn="flipInX">
-          <div className="project">
-            <header>
-              <svg
-                width="50"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#23ce6b"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <title>Folder</title>
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-              </svg>
-              <div className="project-links">
-                <a
-                  href="https://github.com/musfiqur24"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src={githubIcon} alt="GitHub" />
-                </a>
-              </div>
-              <div className="project-links">
-                <a
-                  href="https://tms-ui-blush.vercel.app/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src={externalLink} alt="Visit site" />
-                </a>
-              </div>
-            </header>
-            <div className="body">
-              <h3>Teacher Management System (TMS)</h3>
-              <div className="project-image">
-                <img src={Tms} alt="TMS Project Screenshot" />
-              </div>
-              <p>
-                A CRUD-based platform to manage teacher profiles efficiently,
-                with dynamic forms and lists for quick access and updates.
-                Focused on providing schools with a smooth interface for
-                maintaining staff information while ensuring reliability and
-                scalability of backend services.
-              </p>
-            </div>
-            <footer>
-              <ul className="tech-list">
-                <li>ReactJS</li>
-                <li>Tailwind CSS</li>
-                <li>Java Spring Boot</li>
-              </ul>
-            </footer>
-          </div>
-        </ScrollAnimation>
+      <Reveal delay={0.1}>
+        <section
+          className="project-carousel"
+          aria-roledescription="carousel"
+          aria-label="Featured projects"
+        >
+          <AnimatePresence initial={false} mode="wait">
+            <m.article
+              key={activeProject.title}
+              id="project-carousel-panel"
+              role="tabpanel"
+              className="project-slide"
+              initial={
+                prefersReducedMotion
+                  ? false
+                  : { opacity: 0, x: direction * 36 }
+              }
+              animate={{ opacity: 1, x: 0 }}
+              exit={
+                prefersReducedMotion
+                  ? { opacity: 0 }
+                  : { opacity: 0, x: direction * -28 }
+              }
+              transition={{ duration: prefersReducedMotion ? 0.01 : 0.38, ease: "easeOut" }}
+              drag={prefersReducedMotion ? false : "x"}
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.14}
+              onDragEnd={(_, info) => {
+                if (Math.abs(info.offset.x) < 60) return;
+                if (info.offset.x < 0) showNext();
+                else showPrevious();
+              }}
+            >
+              <div className="project-copy">
+                <div className="project-topline">
+                  <span className="project-label">Featured build // in production</span>
+                  <span className="project-count" aria-live="polite">
+                    {String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                  </span>
+                </div>
 
-        {/* UTMGo Ride Sharing */}
-        <ScrollAnimation animateIn="flipInX">
-          <div className="project">
-            <header>
-              <svg
-                width="50"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#23ce6b"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <title>Folder</title>
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-              </svg>
-              <div className="project-links">
-                <a
-                  href="https://github.com/musfiqur24/UTM_Go_backbenchers-"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src={githubIcon} alt="GitHub" />
-                </a>
-              </div>
-            </header>
-            <div className="body">
-              <h3>UTMGo - A Ride Sharing App</h3>
-              <div className="project-image">
-                <img src={Utmgo} alt="UTMGo Project" />
-              </div>
-              <p>
-                A ride-sharing mobile app enabling users to book rides with
-                real-time GPS navigation, ride requests, acceptance/rejection,
-                and efficient ride queuing. Designed with a user-centric
-                interface and robust backend integration to enhance travel
-                convenience for students and daily commuters.
-              </p>
-            </div>
-            <footer>
-              <ul className="tech-list">
-                <li>Flutter</li>
-                <li>Firebase</li>
-              </ul>
-            </footer>
-          </div>
-        </ScrollAnimation>
+                <h3>{activeProject.title}</h3>
+                <p className="project-description">{activeProject.description}</p>
 
-        {/* Food Ordering System */}
-        <ScrollAnimation animateIn="flipInX">
-          <div className="project">
-            <header>
-              <svg
-                width="50"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#23ce6b"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <title>Folder</title>
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-              </svg>
-              <div className="project-links">
-                <a
-                  href="https://github.com/musfiqur24/dine_out"
-                  target="_blank"
-                  rel="noreferrer"
+                <div className="project-stack">
+                  <span className="stack-label">Built with</span>
+                  <ul className="tech-list">
+                    {activeProject.technologies.map((technology) => (
+                      <li key={technology}>{technology}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="project-links">
+                  {activeProject.links.map((link) => {
+                    const LinkIcon = link.type === "source" ? Code2 : ExternalLink;
+
+                    return (
+                      <m.a
+                        href={link.href}
+                        key={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={link.label}
+                        whileHover={prefersReducedMotion ? undefined : { y: -2 }}
+                        whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
+                      >
+                        <LinkIcon size={17} strokeWidth={2} aria-hidden="true" />
+                        {link.type === "source" ? "View source" : "View project"}
+                      </m.a>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="project-preview">
+                <div className="browser-bar" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <div className="project-image">
+                  <img
+                    src={activeProject.image}
+                    alt={activeProject.imageAlt}
+                    loading={activeIndex === 0 ? "eager" : "lazy"}
+                  />
+                </div>
+              </div>
+            </m.article>
+          </AnimatePresence>
+
+          <div className="carousel-footer">
+            <div
+              className="slide-progress"
+              role="tablist"
+              aria-label="Choose a featured project"
+              onKeyDown={(event) => {
+                if (event.key === "ArrowRight") {
+                  event.preventDefault();
+                  showNext();
+                }
+                if (event.key === "ArrowLeft") {
+                  event.preventDefault();
+                  showPrevious();
+                }
+              }}
+            >
+              {projects.map((project, index) => (
+                <button
+                  type="button"
+                  key={project.title}
+                  role="tab"
+                  aria-selected={index === activeIndex}
+                  aria-controls="project-carousel-panel"
+                  aria-label={`Show ${project.title}`}
+                  className={index === activeIndex ? "is-active" : undefined}
+                  onClick={() => selectProject(index)}
                 >
-                  <img src={githubIcon} alt="GitHub" />
-                </a>
-              </div>
-              <div className="project-links">
-                <a
-                  href="https://dine-out-pi-bay.vercel.app/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src={externalLink} alt="Visit site" />
-                </a>
-              </div>
-            </header>
-            <div className="body">
-              <h3>Food Ordering System</h3>
-              <div className="project-image">
-                <img src={Dineout} alt="Dineout Project" />
-              </div>
-              <p>
-                A responsive web-based application allowing users to browse,
-                order, and manage food items online. Focused on providing a
-                clean, intuitive UI and smooth ordering process to improve user
-                experience and streamline restaurant operations.
-              </p>
+                  <m.span
+                    className="progress-fill"
+                    animate={{ scaleX: index === activeIndex ? 1 : 0 }}
+                    transition={{ duration: prefersReducedMotion ? 0 : 0.32, ease: "easeOut" }}
+                  />
+                </button>
+              ))}
             </div>
-            <footer>
-              <ul className="tech-list">
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-              </ul>
-            </footer>
+
+            <div className="carousel-controls">
+              <m.button
+                type="button"
+                aria-label="Show previous project"
+                onClick={showPrevious}
+                whileHover={prefersReducedMotion ? undefined : { scale: 1.06, x: -1 }}
+                whileTap={prefersReducedMotion ? undefined : { scale: 0.94 }}
+              >
+                <ArrowLeft size={22} strokeWidth={2.1} aria-hidden="true" />
+              </m.button>
+              <m.button
+                type="button"
+                aria-label="Show next project"
+                onClick={showNext}
+                whileHover={prefersReducedMotion ? undefined : { scale: 1.06, x: 1 }}
+                whileTap={prefersReducedMotion ? undefined : { scale: 0.94 }}
+              >
+                <ArrowRight size={22} strokeWidth={2.1} aria-hidden="true" />
+              </m.button>
+            </div>
           </div>
-        </ScrollAnimation>
-      </div>
+        </section>
+      </Reveal>
     </Container>
   );
 }

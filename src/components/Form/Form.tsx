@@ -1,91 +1,115 @@
-import { Container, ContainerSucces } from "./styles";
+import { FormEvent, useState } from "react";
 import { useForm, ValidationError } from "@formspree/react";
-import { toast, ToastContainer } from "react-toastify";
-import ReCAPTCHA from "react-google-recaptcha";
-import { useEffect, useState } from "react";
 import validator from "validator";
+import { Container, ContainerSucces } from "./styles";
 
 export function Form() {
   const [state, handleSubmit] = useForm("xknkpqry");
-  const [validEmail, setValidEmail] = useState(false);
-  const [isHuman, setIsHuman] = useState(false);
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  function verifyEmail(email: string) {
-    if (validator.isEmail(email)) {
-      setValidEmail(true);
-    } else {
-      setValidEmail(false);
-    }
+
+  const validEmail = validator.isEmail(email.trim());
+  const hasMessage = message.trim().length > 0;
+  const showEmailError = email.length > 0 && !validEmail;
+
+  function submitForm(event: FormEvent<HTMLFormElement>) {
+    handleSubmit(event);
   }
-  useEffect(() => {
-    if (state.succeeded) {
-      toast.success("Email successfully sent!", {
-        position: toast.POSITION.BOTTOM_LEFT,
-        pauseOnFocusLoss: false,
-        closeOnClick: true,
-        hideProgressBar: false,
-        toastId: "succeeded",
-      });
-    }
-  });
+
   if (state.succeeded) {
     return (
-      <ContainerSucces>
-        <h3>Thanks for getting in touch!</h3>
+      <ContainerSucces role="status" aria-live="polite">
+        <span className="success-mark" aria-hidden="true">
+          &#10003;
+        </span>
+        <span className="success-kicker">Message sent</span>
+        <h3>Thanks for getting in touch.</h3>
+        <p>I&apos;ll have everything I need to follow up on your message.</p>
         <button
+          type="button"
           onClick={() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            const prefersReducedMotion = window.matchMedia(
+              "(prefers-reduced-motion: reduce)"
+            ).matches;
+            window.scrollTo({
+              top: 0,
+              behavior: prefersReducedMotion ? "auto" : "smooth",
+            });
           }}
         >
           Back to the top
         </button>
-        <ToastContainer />
       </ContainerSucces>
     );
   }
+
   return (
     <Container>
-      <h2>Get in touch using the form</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Email"
-          id="email"
-          type="email"
-          name="email"
-          onChange={(e) => {
-            verifyEmail(e.target.value);
-          }}
-          required
-        />
-        <ValidationError prefix="Email" field="email" errors={state.errors} />
-        <textarea
-          required
-          placeholder="Send a message to get started."
-          id="message"
-          name="message"
-          onChange={(e) => {
-            setMessage(e.target.value);
-          }}
-        />
-        <ValidationError
-          prefix="Message"
-          field="message"
-          errors={state.errors}
-        />
-        <ReCAPTCHA
-          sitekey="6Lfj9NYfAAAAAP8wPLtzrsSZeACIcGgwuEIRvbSg"
-          onChange={(e) => {
-            setIsHuman(true);
-          }}
-        ></ReCAPTCHA>
-        <button
-          type="submit"
-          disabled={state.submitting || !validEmail || !message || !isHuman}
-        >
-          Submit
-        </button>
+      <div className="form-heading">
+        <span className="form-kicker">Project enquiry</span>
+        <h3>Tell me a little about it.</h3>
+        <p>Share the essentials, and I&apos;ll have the context to respond.</p>
+      </div>
+
+      <form onSubmit={submitForm}>
+        <div className="field">
+          <label htmlFor="email">
+            Email address <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            autoComplete="email"
+            inputMode="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            aria-invalid={showEmailError || undefined}
+            aria-describedby={showEmailError ? "email-format-error" : undefined}
+            required
+          />
+          {showEmailError && (
+            <p className="field-error" id="email-format-error" role="alert">
+              Enter a valid email address.
+            </p>
+          )}
+          <div className="formspree-error" aria-live="polite">
+            <ValidationError prefix="Email" field="email" errors={state.errors} />
+          </div>
+        </div>
+
+        <div className="field">
+          <label htmlFor="message">
+            Your message <span aria-hidden="true">*</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="A short note about your project, goal, or question."
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+            aria-describedby="message-hint"
+            required
+          />
+          <p className="field-hint" id="message-hint">
+            A few details are enough to get the conversation started.
+          </p>
+          <div className="formspree-error" aria-live="polite">
+            <ValidationError prefix="Message" field="message" errors={state.errors} />
+          </div>
+        </div>
+
+        <div className="submit-row">
+          <p>
+            <span aria-hidden="true">*</span> Required fields
+          </p>
+          <button type="submit" disabled={state.submitting || !validEmail || !hasMessage}>
+            {state.submitting ? "Sending..." : "Send message"}
+            <span aria-hidden="true">&#8594;</span>
+          </button>
+        </div>
       </form>
-      <ToastContainer />
     </Container>
   );
 }

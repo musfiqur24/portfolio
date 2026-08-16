@@ -1,182 +1,250 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.8rem 10rem;
-  
-  backdrop-filter: blur(6px);
-
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 7.2rem;
+  padding: 1.1rem clamp(2rem, 6vw, 10rem);
+  border-bottom: 1px solid var(--border);
+  background: rgba(9, 17, 31, 0.65);
+  backdrop-filter: blur(18px);
 
-  // Add a new class for dark mode
-  &.dark {
-    background-color: #21212150;
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: max-content;
+  }
+
+  .brand-mark {
+    display: grid;
+    width: 3.2rem;
+    height: 3.2rem;
+    place-items: center;
+    border: 1px solid rgba(66, 220, 160, 0.52);
+    border-radius: 0.9rem;
+    background: rgba(66, 220, 160, 0.1);
+    color: var(--green);
+    font-size: 1.05rem;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+  }
+
+  .brand-copy {
+    color: var(--text-color);
+    font-size: 1.35rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-transform: uppercase;
   }
 
   nav {
     display: flex;
     align-items: center;
-    gap: 1.8rem;
-    a {
-      color: #FFFF;
-      padding: 0.6rem;
-      font-family: 'Red Hat Display', sans-serif;
-      font-weight: 500;
-      text-transform: uppercase;
-      transition: filter 0.25s;
+    gap: clamp(1.4rem, 2vw, 2.8rem);
+    margin-left: auto;
 
-      &.button {
-        padding: 0.6rem 2rem;
+    a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 0;
+      color: var(--text-secondary);
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.015em;
+      transition: color 0.2s ease;
+
+      &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0.25rem;
+        left: 0;
+        height: 0.15rem;
+        border-radius: 999px;
+        background: var(--green);
+        content: "";
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.22s ease;
       }
 
-      &:hover {
-        filter: brightness(0.6);
+      &.resume-link {
+        padding: 0.85rem 1.1rem;
+        border: 1px solid var(--border);
+        border-radius: 0.8rem;
+        background: transparent;
+        color: var(--text-color);
+        font-size: 1.2rem;
+
+        &::after {
+          display: none;
+        }
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          color: var(--text-color);
+
+          &::after {
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+        }
+
+        &.resume-link:hover {
+          border-color: rgba(66, 220, 160, 0.58);
+          background: rgba(66, 220, 160, 0.08);
+          box-shadow: none;
+          transform: translateY(-1px);
+        }
       }
     }
   }
 
-  .menu-container {
-    cursor: pointer;
-    padding: 0.6rem 0;
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 3.6rem;
+    height: 3.6rem;
+    padding: 0;
+    margin-left: 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 0.9rem;
+    background: var(--surface-solid);
+    color: var(--text-secondary);
+    box-shadow: none;
+    transform: none;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: rgba(66, 220, 160, 0.58);
+        color: var(--green);
+        box-shadow: none;
+        transform: none;
+      }
+    }
   }
 
   .menu {
-    width: 2rem;
-    height: 0.2rem;
-    background: #FFFF;
-    position: relative;
-    cursor: pointer;
     display: none;
+    width: 3.8rem;
+    height: 3.8rem;
+    padding: 0;
+    margin-left: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 0.9rem;
+    background: var(--surface-solid);
+    box-shadow: none;
+    transform: none;
 
-    &:before {
-      bottom: 0.5rem;
-    }
-    &:after {
-      top: 0.5rem;
+    &::before,
+    &::after,
+    span {
+      position: absolute;
+      left: 1rem;
+      width: 1.6rem;
+      height: 0.15rem;
+      border-radius: 99px;
+      background: var(--text-color);
+      content: "";
+      transition: transform 0.24s ease, opacity 0.2s ease;
     }
 
-    &.active:before {
-      bottom: 0;
+    &::before {
+      top: 1.22rem;
+    }
+
+    span {
+      top: 1.83rem;
+    }
+
+    &::after {
+      top: 2.44rem;
+    }
+
+    &.active::before {
+      top: 1.83rem;
       transform: rotate(45deg);
     }
 
-    &.active:after {
-      top: 0;
-      transform: rotate(135deg);
+    &.active span {
+      opacity: 0;
     }
 
-    &.active {
-      background-color: rgba(0, 0, 0, 0);
+    &.active::after {
+      top: 1.83rem;
+      transform: rotate(-45deg);
     }
-  }
 
-  .menu:before, .menu:after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 0.2rem;
-    background: #FFFF;
-    cursor: pointer;
-    transition: .6s;
-  }
-
-  input[type=checkbox] {
-    height: 0;
-    width: 0;
-    visibility: hidden;
-    outline: none;
-  }
-
-  label {
-    cursor: pointer;
-    text-indent: -9999px;
-    width: 55px;
-    height: 30px;
-    background: var(--green);
-    display: block;
-    justify-content: center;
-    align-items: center;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    border-radius: 100px;
-    position: relative;
-    margin-left: auto;
-    right: 10px;
-  }
-
-  @media only screen and (max-width: 800px) {
-    label {
-      position: relative;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        box-shadow: none;
+        transform: none;
+      }
     }
   }
 
-  label:after {
-    content: '';
-    background: #FFF;
-    width: 20px;
-    height: 20px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    position: absolute;
-    top: 5px;
-    left: 4px;
-    transition: cubic-bezier(0.68, -0.55, 0.27, 01.55) 320ms;
-  }
+  @media (max-width: 960px) {
+    nav {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      visibility: hidden;
+      width: 100%;
+      height: 100dvh;
+      padding: 10rem 3rem 4rem;
+      place-content: center;
+      gap: 2.3rem;
+      background: var(--background);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-1rem);
+      transition: opacity 0.26s ease, transform 0.26s ease, visibility 0.26s;
 
-  input:checked + label {
-    background: var(--pink);
-  }
+      a {
+        color: var(--text-color);
+        font-size: 1.75rem;
+        text-align: center;
 
-  input:checked + label:after {
-    left: calc(100% - 5px);
-    -webkit-transform: translateX(-100%);
-    -moz-transform: translateX(-100%);
-    -ms-transform: translateX(-100%);
-    -o-transform: translateX(-100%);
-    transform: translateX(-100%);
-  }
+        &.resume-link {
+          justify-content: center;
+          margin-top: 0.5rem;
+          padding: 1.2rem 2.4rem;
+          font-size: 1.45rem;
+        }
+      }
 
-  @media (max-width: 960px){
-    padding: 1.8rem 3rem;
+      &.active {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+    }
+
+    .theme-toggle {
+      margin-left: auto;
+    }
 
     .menu {
       display: block;
     }
+  }
 
-    nav {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      overflow: hidden;
-      opacity: 0;
-      visibility: hidden;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: fixed;
-      width: 100vw;
-      height: 100vh;
-      background: var(--blue);
-      top: 0;
-      left: 0;
-      transition: opacity 0.25s;
-      background-color: var(--green);
+  @media (max-width: 420px) {
+    padding-inline: 1.6rem;
 
-      a.button {
-        background-color: var(--pink);
-      }
-
-      &.active {
-        opacity: 1;
-        visibility: visible;
-      }
+    .brand-mark {
+      width: 3rem;
+      height: 3rem;
     }
   }
 `;

@@ -1,129 +1,167 @@
+import { useState } from "react";
+import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { Container, EducationCard } from "./styles";
-import Musfiqur from "../../assets/Musfiqur.png";
-import java from "../../assets/java.svg";
-import htmlIcon from "../../assets/html-icon.svg";
-import cssIcon from "../../assets/css-icon.svg";
-import jsIcon from "../../assets/js-icon.svg";
-import reactIcon from "../../assets/react-icon.svg";
-import typescriptIcon from "../../assets/typescript-icon.svg";
-import tailwindIcon from "../../assets/tailwind.svg";
-import MySql from "../../assets/1174941.webp";
-import PostgreSql from "../../assets/postgresql.png";
-import ScrollAnimation from "react-animate-on-scroll";
+import { Reveal } from "../motion/Reveal";
+
+const education = [
+  {
+    degree: "BSc in Computer Science (Software Engineering)",
+    institute: "Universiti Teknologi Malaysia",
+    duration: "Aug 2020 – Mar 2025",
+    location: "Johor, Malaysia",
+    details: "CGPA: 3.25",
+  },
+  {
+    degree: "Higher Secondary School (HSC)",
+    institute: "Dhaka College",
+    duration: "2017 – 2019",
+    location: "Dhaka, Bangladesh",
+    details: "GPA: 5.00 (Science)",
+  },
+];
 
 export function About() {
+  const prefersReducedMotion = useReducedMotion() ?? false;
+  const hoverLift = prefersReducedMotion ? undefined : { y: -5 };
+  const [openEducationIndex, setOpenEducationIndex] = useState<number | null>(null);
+
+  const toggleEducationDrawer = (index: number) => {
+    setOpenEducationIndex((currentIndex) => (currentIndex === index ? null : index));
+  };
+
   return (
     <Container id="about">
-      <div className="about-text">
-        <ScrollAnimation animateIn="fadeInLeft">
-          <h2>About me</h2>
-        </ScrollAnimation>
-        <ScrollAnimation animateIn="fadeInLeft" delay={100}>
-          <p>
-            Hi there! I'm Musfiqur, a keen & enthusiastic Software Engineer
-            skilled in Full-Stack Web development, contributing in scalable
-            software solutions. Efficient in building generative financial
-            reports and integrating them into web applications.
-          </p>
-        </ScrollAnimation>
-        <ScrollAnimation
-          animateIn="fadeInLeft"
-          delay={200}
-          style={{ marginTop: "2rem", marginBottom: "2rem" }}
-        >
-          <p>
-            I build responsive and user-friendly web applications, implement
-            robust backend services and maintain database systems.
-          </p>
-        </ScrollAnimation>
-        <ScrollAnimation animateIn="fadeInLeft" delay={300}>
-          <p>
-            I usually follow agile methodology to ensure timely delivery and
-            continuous improvement.
-          </p>
-        </ScrollAnimation>
+      <div className="about-layout">
+        <Reveal direction="left">
+          <div className="section-heading">
+            <span className="eyebrow">04 / Developer notes</span>
+            <h2>Engineering calm behind complex systems.</h2>
+            <p className="intro-copy">
+              I&apos;m Musfiqur, a software engineer who enjoys turning ambitious ideas
+              into dependable products and straightforward digital experiences.
+            </p>
+          </div>
+        </Reveal>
 
-        {/* Education Section */}
-        <ScrollAnimation animateIn="fadeInLeft" delay={500}>
-          <h3 style={{ marginTop: "3rem" }}>Education</h3>
-        </ScrollAnimation>
-        <div className="education-grid">
-          <ScrollAnimation animateIn="fadeInUp" delay={550}>
-            <EducationCard>
-              <h4>BSc in Computer Science (Software Engineering)</h4>
-              <p className="institute">Universiti Teknologi Malaysia</p>
-              <p className="duration">Aug 2020 – Mar 2025</p>
-              <p className="location">Johor, Malaysia</p>
-              <p className="details">CGPA: 3.25</p>
-            </EducationCard>
-          </ScrollAnimation>
-          <ScrollAnimation animateIn="fadeInUp" delay={650}>
-            <EducationCard>
-              <h4>Higher Secondary School (HSC)</h4>
-              <p className="institute">Dhaka College</p>
-              <p className="duration">2017 – 2019</p>
-              <p className="location">Dhaka, Bangladesh</p>
-              <p className="details">GPA: 5.00 (Science)</p>
-            </EducationCard>
-          </ScrollAnimation>
-        </div>
-        <ScrollAnimation animateIn="fadeInLeft" delay={400}>
-          <h3>Here are my main skills:</h3>
-        </ScrollAnimation>
-        <div className="hard-skills">
-          <div className="hability">
-            <ScrollAnimation animateIn="fadeInUp" delay={180}>
-              <img src={htmlIcon} alt="Html" />
-            </ScrollAnimation>
-          </div>
-          <div className="hability">
-            <ScrollAnimation animateIn="fadeInUp" delay={190}>
-              <img src={cssIcon} alt="Css" />
-            </ScrollAnimation>
-          </div>
-          <div className="hability">
-            <ScrollAnimation animateIn="fadeInUp" delay={190}>
-              <img src={tailwindIcon} alt="Tailwind" />
-            </ScrollAnimation>
-          </div>
-          <div className="hability">
-            <ScrollAnimation animateIn="fadeInUp" delay={110}>
-              <img src={java} alt="java" />
-            </ScrollAnimation>
-          </div>
-          <div className="hability">
-            <ScrollAnimation animateIn="fadeInUp" delay={120}>
-              <img src={jsIcon} alt="JavaScript" />
-            </ScrollAnimation>
-          </div>
-          <div className="hability">
-            <ScrollAnimation animateIn="fadeInUp" delay={130}>
-              <img src={reactIcon} alt="React" />
-            </ScrollAnimation>
-          </div>
-          <div className="hability">
-            <ScrollAnimation animateIn="fadeInUp" delay={140}>
-              <img src={typescriptIcon} alt="Typescript" />
-            </ScrollAnimation>
-          </div>
-          <div className="hability">
-            <ScrollAnimation animateIn="fadeInUp" delay={140}>
-              <img src={PostgreSql} alt="PostgreSql" />
-            </ScrollAnimation>
+        <div className="intro-column">
+          <div className="about-copy">
+            <Reveal direction="right" delay={0.08}>
+              <p>
+                My work moves comfortably from responsive React interfaces to backend
+                services, APIs, databases, and the practical details that make systems
+                reliable in production.
+              </p>
+            </Reveal>
+            <Reveal direction="right" delay={0.14}>
+              <p>
+                I&apos;m especially interested in automation and integrations—connecting
+                tools, simplifying repetitive workflows, and helping teams spend more
+                time on meaningful work.
+              </p>
+            </Reveal>
           </div>
 
-          <div className="hability">
-            <ScrollAnimation animateIn="fadeInUp" delay={190}>
-              <img src={MySql} alt="MySql" />
-            </ScrollAnimation>
-          </div>
+          <Reveal direction="right" delay={0.2}>
+            <div className="focus-list" aria-label="Professional focus areas">
+              <span>Full-stack development</span>
+              <span>Systems integration</span>
+              <span>Automation workflows</span>
+            </div>
+          </Reveal>
         </div>
       </div>
 
-      <div className="about-image">
-        <ScrollAnimation animateIn="fadeInRight" delay={210}>
-          <img src={Musfiqur} alt="Musfiqur Rahman" />
-        </ScrollAnimation>
+      <div className="about-details">
+        <section className="education-panel" aria-labelledby="education-heading">
+          <Reveal direction="left">
+            <div className="panel-heading">
+              <span className="eyebrow">Learning path</span>
+              <h3 id="education-heading">Education</h3>
+            </div>
+          </Reveal>
+          <div className="education-grid">
+            {education.map((item, index) => {
+              const isOpen = openEducationIndex === index;
+              const drawerId = `education-drawer-${index}`;
+
+              return (
+                <Reveal key={item.degree} delay={index * 0.1}>
+                  <EducationCard $isOpen={isOpen}>
+                    <m.button
+                      type="button"
+                      className="education-summary"
+                      aria-expanded={isOpen}
+                      aria-controls={drawerId}
+                      onClick={() => toggleEducationDrawer(index)}
+                      whileHover={hoverLift}
+                      whileTap={prefersReducedMotion ? undefined : { scale: 0.99 }}
+                      transition={{ duration: 0.24, ease: "easeOut" }}
+                    >
+                      <span className="card-index">0{index + 1}</span>
+                      <span className="summary-copy">
+                        <span className="degree">{item.degree}</span>
+                        <span className="institute">{item.institute}</span>
+                      </span>
+                      <span className="drawer-toggle">
+                        <span>{isOpen ? "Close details" : "View details"}</span>
+                        <span className="drawer-chevron" aria-hidden="true" />
+                      </span>
+                    </m.button>
+
+                    <AnimatePresence initial={false}>
+                      {isOpen ? (
+                        <m.div
+                          id={drawerId}
+                          className="education-drawer"
+                          role="region"
+                          aria-label={`${item.degree} details`}
+                          initial={
+                            prefersReducedMotion ? { opacity: 0 } : { height: 0, opacity: 0 }
+                          }
+                          animate={
+                            prefersReducedMotion
+                              ? { opacity: 1 }
+                              : { height: "auto", opacity: 1 }
+                          }
+                          exit={
+                            prefersReducedMotion ? { opacity: 0 } : { height: 0, opacity: 0 }
+                          }
+                          transition={{
+                            duration: prefersReducedMotion ? 0 : 0.28,
+                            ease: "easeOut",
+                          }}
+                        >
+                          <div className="drawer-content">
+                            <div className="drawer-item drawer-item-wide">
+                              <span>Qualification</span>
+                              <p>{item.degree}</p>
+                            </div>
+                            <div className="drawer-item">
+                              <span>Institution</span>
+                              <p>{item.institute}</p>
+                            </div>
+                            <div className="drawer-item">
+                              <span>Duration</span>
+                              <p>{item.duration}</p>
+                            </div>
+                            <div className="drawer-item">
+                              <span>Location</span>
+                              <p>{item.location}</p>
+                            </div>
+                            <div className="drawer-item drawer-result">
+                              <span>Academic result</span>
+                              <p>{item.details}</p>
+                            </div>
+                          </div>
+                        </m.div>
+                      ) : null}
+                    </AnimatePresence>
+                  </EducationCard>
+                </Reveal>
+              );
+            })}
+          </div>
+        </section>
       </div>
     </Container>
   );
